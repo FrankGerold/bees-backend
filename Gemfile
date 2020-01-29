@@ -42,3 +42,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Netflix fast-json
 gem 'fast_jsonapi'
+
+gem "rack", "~> 2.1"
+gem "cors", "~> 1.0"
+
+gem "jwt", "~> 2.2"
+
+gem "faker", "~> 2.10"
