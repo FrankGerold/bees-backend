@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   before_action :authorized, :keygen
 
   def keygen
-    @ecdsa_key = OpenSSL::PKey::EC.new 'prime256v1'
+    @ecdsa_key = OpenSSL::PKey::EC.new 'secp384r1'
     @ecdsa_key.generate_key
     @ecdsa_public = OpenSSL::PKey::EC.new @ecdsa_key
     @ecdsa_public.private_key = nil
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
 
 
   def encode_token(payload)
-    JWT.encode(payload, @ecdsa_key, 'ES256')
+    JWT.encode(payload, @ecdsa_key, 'ES384')
   end
 
   def auth_header
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, @ecdsa_public, true, 'ES256')[0]
+        JWT.decode(token, @ecdsa_public, true, 'ES384')[0]
       rescue JWT::DecodeError
         nil
       end
