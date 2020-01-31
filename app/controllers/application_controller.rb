@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
 
 
   def encode_token(payload)
-    JWT.encode(payload, @ecdsa_key, 'ES384')
+    JWT.encode(payload, Rails.application.ecdsa_key, 'ES384')
   end
 
   def auth_header
