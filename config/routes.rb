@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   # resources :questions
   # resources :quizzes
   resources :users, only: [:create, :show]
+
   post '/login', to: 'auth#create'
+
   get '/profile', to: 'users#profile'
+
+  get '/auth', to: 'auth#persist'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
