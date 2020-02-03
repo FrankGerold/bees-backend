@@ -1,5 +1,17 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create, :index, :show]
+
+# Testing Purposes
+  def index
+    @users = User.all
+    render json: UserSerializer.new(@users)
+  end
+
+  def show
+    @user = User.find(params[:id])
+    render json: UserSerializer.new(@user)
+  end
+  # End Test Methods
 
   def profile
     render json: {user: UserSerializer.new(current_user)}, status: :accepted
@@ -12,7 +24,7 @@ class UsersController < ApplicationController
       render json: {user: UserSerializer.new(@user),
         jwt: @token}, status: :created
     else
-      render json: { error: 'User Creation Failed'}, status: :not_acceptable
+      render json: { message: 'User Creation Failed', errors: @user.errors.full_messages}, status: :not_acceptable
     end
   end
 
@@ -22,4 +34,4 @@ class UsersController < ApplicationController
     params.permit(:userName, :name, :password, :bio, :photo)
   end
 
-endhf9se}}
+end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # resources :answers
   # resources :questions
   # resources :quizzes
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show, :index]
 
   post '/login', to: 'auth#create'
 
