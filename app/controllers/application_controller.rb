@@ -21,12 +21,12 @@ class ApplicationController < ActionController::API
     request.headers['Authorization']
   end
 
-  def decoded_token(token)
+  def decoded_token
     if auth_header
       token = auth_header.split(' ')[1]
       public_key = OpenSSL::PKey::EC.new(Rails.application.credentials.ecdsa_public)
       begin
-        JWT.decode(token, public_key, true, 'ES384')[0]
+        JWT.decode(token, public_key, true, algorithm: 'ES384')[0]
       rescue JWT::DecodeError
         nil
       end
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
 
   def current_user
     if decoded_token
-      user_id = decoded_token[0]['user_id']
+      user_id = decoded_token['user_id']
       @user = User.find(user_id)
     end
   end
