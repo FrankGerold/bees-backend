@@ -1,6 +1,6 @@
 class QuestionSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :topic
-  belongs_to :quiz
+  attributes :topic, :question, :full_answer
+  has_many :questions_quizzes
   has_many :answers
 end
