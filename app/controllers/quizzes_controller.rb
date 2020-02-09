@@ -33,16 +33,19 @@ class QuizzesController < ApplicationController
 
   def update
 
+
+
+  end
+
   private
 
+# Take 10 random questions from the DB list of questions, and save them to the current quiz
   def generate_questions(quiz)
-
     randomQuestions = Question.order('RANDOM()').take(10)
 
     for question in randomQuestions do
       QuestionsQuiz.create(quiz: quiz, question: question)
     end
-
   end
 
   def quiz_params
