@@ -43,7 +43,14 @@ class QuizzesController < ApplicationController
   def update
     @quiz = Quiz.find (params[:id])
 
+    @quiz.update({
+      name: params[:name],
+      score: params[:score]
+      })
 
+      @options = {include: [:questions]}
+
+      render json: QuizSerializer.new(@quiz, @options)
 
   end
 
