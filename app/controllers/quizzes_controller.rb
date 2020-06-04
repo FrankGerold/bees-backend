@@ -35,7 +35,7 @@ class QuizzesController < ApplicationController
 
   def user
     @user = current_user
-    @quizzes = @user.quizzes
+    @quizzes = @user.quizzes.order(score: :desc)
 
     render json: QuizSerializer.new(@quizzes)
   end
