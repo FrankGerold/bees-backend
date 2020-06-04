@@ -5,12 +5,19 @@ class QuizzesController < ApplicationController
   def index
     @quizzes = Quiz.all
     # render json: @quizzes
-     render json:  QuizSerializer.new(@quizzes)
+
+      @options = {include: [:questions, :answers]}
+     render json:  QuizSerializer.new(@quizzes, @options)
   end
+
+
+  @options = {include: [:questions]}
 
   def show
     @quiz = Quiz.find (params[:id])
-    render json:  QuizSerializer.new(@quiz)
+    @options = {include: [:questions]}
+
+    render json:  QuizSerializer.new(@quiz, @options)
   end
   # end test
 
@@ -21,19 +28,29 @@ class QuizzesController < ApplicationController
 
     generate_questions(@quiz)
 
-    render json: QuizSerializer.new(@quiz)
+    @options = {include: [:questions]}
+
+    render json: QuizSerializer.new(@quiz, @options)
   end
 
   def user
     @user = current_user
-    @quizzes = @user.quizzes
+    @quizzes = @user.quizzes.order(score: :desc)
 
     render json: QuizSerializer.new(@quizzes)
   end
 
   def update
+    @quiz = Quiz.find (params[:id])
 
+    @quiz.update({
+      name: params[:name],
+      score: params[:score]
+      })
 
+      @options = {include: [:questions]}
+
+      render json: QuizSerializer.new(@quiz, @options)
 
   end
 

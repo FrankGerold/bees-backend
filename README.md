@@ -1,24 +1,22 @@
-# README
+# Bees!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## A quick, fun and easy quiz app for learning about bees and wildlife conservation.
 
-Things you may want to cover:
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=NekMMpiNVPg" target="_blank"><img src="http://img.youtube.com/vi/NekMMpiNVPg/0.jpg" alt="Demo Video" width="560" height="315" border="10" /></a>
 
-* Ruby version
+### Features
+* Dynamic single-page web application.
+* Randomly generates quizzes for users to attempt and saves their scores.
+* ReactJS front end for intuitive UI.
+* Redux & Thunk for centralized state control.
+* Ruby on Rails back end with PostgreSQL database for managing quizzes and user accounts.
+* BCrypt and JWT using Elliptic-Curve Cryptography for authentication
 
-* System dependencies
+### [Front-End Repo Here](https://github.com/FrankGerold/bees-frontend "Bees Front-End")
 
-* Configuration
+### Installation
+You'll need an instance of [PostgreSQL](https://www.postgresql.org/download/) running on your local machine,
+and an installation of Ruby on Rails (6+).
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+From the base bees-backend directory in your shell of choice, you'll want to run `bundle install`, followed by `rails db:setup`
+Finally, `rails server` will launch the API locally @ port 3000, ready for the front-end react app to connect!
