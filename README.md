@@ -14,7 +14,7 @@
 
 ### Installation
 You'll need an instance of [PostgreSQL](https://www.postgresql.org/download/) running on your local machine,
-and an insallation of Ruby on Rails (6+).
+and an installation of Ruby on Rails (6+).
 
 From the base bees-backend directory in your shell of choice, you'll want to run `bundle install`, followed by `rails db:setup`
 Finally, `rails server` will launch the API locally @ port 3000, ready for the front-end react app to connect!
